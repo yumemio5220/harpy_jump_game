@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harpy_jump_game/bird.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
             flex: 2,
             child: Container(
               color: Colors.blue,
+              child: Center(child: MyBird()),
             ),
           ),
           Expanded(
