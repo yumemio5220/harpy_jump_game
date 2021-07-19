@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:harpy_jump_game/bird.dart';
 
@@ -7,6 +9,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static double birdYaxis = 0;
+  double time = 0;
+  double height = 0;
+  double initialHeight = birdYaxis;
+  bool gameHasStated = false;
+
+  void jump() {
+    setState(() {
+      time = 0;
+      initialHeight = birdYaxis;
+    });
+  }
+
+  void startGame() {
+    gameHasStated = true;
+    Timer.periodic(Duration(milliseconds: 60), (timer) {
+      time += 0.05;
+      height = -4.9 * time * time + 2.8 * time;
+      setState(() {
+        birdYaxis = initialHeight - height;
+      });
+      if (birdYaxis > 1) {
+        timer.cancel();
+        gameHasStated = false;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +44,20 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              color: Colors.blue,
-              child: Center(child: MyBird()),
+            child: GestureDetector(
+              onTap: () {
+                if (gameHasStated) {
+                  jump();
+                } else {
+                  startGame();
+                }
+              },
+              child: AnimatedContainer(
+                alignment: Alignment(0,birdYaxis),
+                duration: Duration(milliseconds: 0),
+                color: Colors.blue,
+                child: MyBird(),
+              ),
             ),
           ),
           Expanded(
