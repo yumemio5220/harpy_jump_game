@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         birdYaxis = initialHeight - height;
       });
-      if (birdYaxis > 1) {
+      if (birdYaxis > 0.9) {
         timer.cancel();
         gameHasStated = false;
       }
