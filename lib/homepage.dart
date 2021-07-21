@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:harpy_jump_game/barriers.dart';
 import 'package:harpy_jump_game/bird.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,6 +69,13 @@ class _HomePageState extends State<HomePage> {
                           "T A P  T O  P L A Y",
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
+                ),
+                AnimatedContainer(
+                  alignment: Alignment(0, 1.1),
+                  duration: Duration(milliseconds: 0),
+                  child: MyBarrier(
+                    size: 200.0,
+                  ),
                 )
               ])),
           Container(
