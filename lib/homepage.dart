@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   bool gameHasStated = false;
   static double barrierXone = 1;
   double barrierXtwo = barrierXone + 1.8;
+  int score = 100;
+  int highScore = 200;
 
   void jump() {
     setState(() {
@@ -52,9 +54,56 @@ class _HomePageState extends State<HomePage> {
 
       if (birdYaxis > 1) {
         timer.cancel();
-        gameHasStated = false;
+        _showDialog();
       }
     });
+  }
+
+  void replayGame() {
+    setState(() {
+      birdYaxis = 0;
+      time = 0;
+      height = 0;
+      initialHeight = birdYaxis;
+      gameHasStated = false;
+      barrierXone = 1;
+      barrierXtwo = barrierXone + 1.8;
+      score = 50;
+    });
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.brown,
+          title: Text(
+            "GAME OVER",
+            style: TextStyle(color: Colors.white),
+          ),
+          content: Text(
+            "Score: " + score.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            ElevatedButton(
+                child: Text(
+                  "PLAY AGAIN",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  if (score > highScore) {
+                    highScore = score;
+                  }
+                  replayGame();
+                  Navigator.of(context).pop();
+                }
+            )
+          ],
+        );
+      }
+    );
   }
 
   @override
