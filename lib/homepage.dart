@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void replayGame() {
+  void restartGame() {
     setState(() {
       birdYaxis = 0;
       time = 0;
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   if (score > highScore) {
                     highScore = score;
                   }
-                  replayGame();
+                  restartGame();
                   Navigator.of(context).pop();
                 }
             )
