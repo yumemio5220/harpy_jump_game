@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   bool gameHasStated = false;
   static double barrierXone = 1;
   double barrierXtwo = barrierXone + 1.8;
-  int score = 100;
+  int score = 150;
   int highScore = 200;
 
   void jump() {
